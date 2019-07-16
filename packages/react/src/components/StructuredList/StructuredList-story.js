@@ -28,9 +28,9 @@ storiesOf('StructuredList', module)
       <StructuredListWrapper>
         <StructuredListHead>
           <StructuredListRow head>
-            <StructuredListCell head>ColumnA</StructuredListCell>
-            <StructuredListCell head>ColumnB</StructuredListCell>
-            <StructuredListCell head>ColumnC</StructuredListCell>
+            <StructuredListCell head>Column A</StructuredListCell>
+            <StructuredListCell head>Column B</StructuredListCell>
+            <StructuredListCell head>Column C</StructuredListCell>
           </StructuredListRow>
         </StructuredListHead>
         <StructuredListBody>
@@ -100,9 +100,9 @@ storiesOf('StructuredList', module)
         <StructuredListWrapper selection border>
           <StructuredListHead>
             <StructuredListRow head>
-              <StructuredListCell head>ColumnA</StructuredListCell>
-              <StructuredListCell head>ColumnB</StructuredListCell>
-              <StructuredListCell head>ColumnC</StructuredListCell>
+              <StructuredListCell head>Column A</StructuredListCell>
+              <StructuredListCell head>Column B</StructuredListCell>
+              <StructuredListCell head>Column C</StructuredListCell>
               <StructuredListCell head>{''}</StructuredListCell>
             </StructuredListRow>
           </StructuredListHead>
