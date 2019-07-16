@@ -59,29 +59,25 @@ StructuredListWrapper.defaultProps = {
   ariaLabel: 'Structured list section',
 };
 
-export class StructuredListHead extends Component {
-  static propTypes = {
-    /**
-     * Provide the contents of your StructuredListHead
-     */
-    children: PropTypes.node,
-
-    /**
-     * Specify an optional className to be applied to the node
-     */
-    className: PropTypes.string,
-  };
-
-  render() {
-    const { children, className, ...other } = this.props;
-    const classes = classNames(`${prefix}--structured-list-thead`, className);
-    return (
-      <div className={classes} {...other}>
-        {children}
-      </div>
-    );
-  }
+export function StructuredListHead({ children, className, ...other }) {
+  const classes = classNames(`${prefix}--structured-list-thead`, className);
+  return (
+    <div className={classes} {...other}>
+      {children}
+    </div>
+  );
 }
+StructuredListHead.propTypes = {
+  /**
+   * Provide the contents of your StructuredListHead
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the node
+   */
+  className: PropTypes.string,
+};
 
 export class StructuredListInput extends Component {
   static propTypes = {
