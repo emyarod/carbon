@@ -259,47 +259,48 @@ export class StructuredListBody extends Component {
   }
 }
 
-export class StructuredListCell extends Component {
-  static propTypes = {
-    /**
-     * Provide the contents of your StructuredListCell
-     */
-    children: PropTypes.node,
+export function StructuredListCell({
+  children,
+  className,
+  head,
+  noWrap,
+  ...other
+}) {
+  const classes = classNames(className, {
+    [`${prefix}--structured-list-th`]: head,
+    [`${prefix}--structured-list-td`]: !head,
+    [`${prefix}--structured-list-content--nowrap`]: noWrap,
+  });
 
-    /**
-     * Specify an optional className to be applied to the container node
-     */
-    className: PropTypes.string,
-
-    /**
-     * Specify whether your StructuredListCell should be used as a header cell
-     */
-    head: PropTypes.bool,
-
-    /**
-     * Specify whether your StructuredListCell should have text wrapping
-     */
-    noWrap: PropTypes.bool,
-  };
-
-  static defaultProps = {
-    head: false,
-    noWrap: false,
-  };
-
-  render() {
-    const { children, className, head, noWrap, ...other } = this.props;
-
-    const classes = classNames(className, {
-      [`${prefix}--structured-list-th`]: head,
-      [`${prefix}--structured-list-td`]: !head,
-      [`${prefix}--structured-list-content--nowrap`]: noWrap,
-    });
-
-    return (
-      <div className={classes} {...other}>
-        {children}
-      </div>
-    );
-  }
+  return (
+    <div className={classes} {...other}>
+      {children}
+    </div>
+  );
 }
+StructuredListCell.propTypes = {
+  /**
+   * Provide the contents of your StructuredListCell
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify whether your StructuredListCell should be used as a header cell
+   */
+  head: PropTypes.bool,
+
+  /**
+   * Specify whether your StructuredListCell should have text wrapping
+   */
+  noWrap: PropTypes.bool,
+};
+
+StructuredListCell.defaultProps = {
+  head: false,
+  noWrap: false,
+};
