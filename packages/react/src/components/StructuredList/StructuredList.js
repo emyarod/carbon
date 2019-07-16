@@ -145,79 +145,73 @@ export class StructuredListInput extends Component {
   }
 }
 
-export class StructuredListRow extends Component {
-  static propTypes = {
-    /**
-     * Provide the contents of your StructuredListRow
-     */
-    children: PropTypes.node,
-
-    /**
-     * Specify an optional className to be applied to the container node
-     */
-    className: PropTypes.string,
-
-    /**
-     * Specify whether your StructuredListRow should be used as a header row
-     */
-    head: PropTypes.bool,
-
-    /**
-     * Specify whether a `<label>` should be used
-     */
-    label: PropTypes.bool,
-
-    /**
-     * Specify the tab index of the container node, if `<label>` is in use
-     */
-    tabIndex: PropTypes.number,
-
-    /**
-     * Provide a handler that is invoked on the key down event for the control,
-     * if `<label>` is in use
-     */
-    onKeyDown: PropTypes.func,
-  };
-
-  static defaultProps = {
-    head: false,
-    label: false,
-    tabIndex: 0,
-    onKeyDown: () => {},
-  };
-
-  render() {
-    const {
-      onKeyDown,
-      tabIndex,
-      children,
-      className,
-      head,
-      label,
-      ...other
-    } = this.props;
-
-    const classes = classNames(`${prefix}--structured-list-row`, className, {
-      [`${prefix}--structured-list-row--header-row`]: head,
-    });
-
-    return label ? (
-      <label
-        {...other}
-        tabIndex={tabIndex}
-        className={classes}
-        onKeyDown={onKeyDown}
-        role="presentation" // eslint-disable-line jsx-a11y/no-interactive-element-to-noninteractive-role
-      >
-        {children}
-      </label>
-    ) : (
-      <div {...other} className={classes}>
-        {children}
-      </div>
-    );
-  }
+export function StructuredListRow({
+  onKeyDown,
+  tabIndex,
+  children,
+  className,
+  head,
+  label,
+  ...other
+}) {
+  const classes = classNames(`${prefix}--structured-list-row`, className, {
+    [`${prefix}--structured-list-row--header-row`]: head,
+  });
+  return label ? (
+    <label
+      {...other}
+      tabIndex={tabIndex}
+      className={classes}
+      onKeyDown={onKeyDown}
+      role="presentation" // eslint-disable-line jsx-a11y/no-interactive-element-to-noninteractive-role
+    >
+      {children}
+    </label>
+  ) : (
+    <div {...other} className={classes}>
+      {children}
+    </div>
+  );
 }
+StructuredListRow.propTypes = {
+  /**
+   * Provide the contents of your StructuredListRow
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify whether your StructuredListRow should be used as a header row
+   */
+  head: PropTypes.bool,
+
+  /**
+   * Specify whether a `<label>` should be used
+   */
+  label: PropTypes.bool,
+
+  /**
+   * Specify the tab index of the container node, if `<label>` is in use
+   */
+  tabIndex: PropTypes.number,
+
+  /**
+   * Provide a handler that is invoked on the key down event for the control,
+   * if `<label>` is in use
+   */
+  onKeyDown: PropTypes.func,
+};
+
+StructuredListRow.defaultProps = {
+  head: false,
+  label: false,
+  tabIndex: 0,
+  onKeyDown: () => {},
+};
 
 export class StructuredListBody extends Component {
   static propTypes = {
