@@ -13,62 +13,51 @@ import uid from '../../tools/uniqueId';
 
 const { prefix } = settings;
 
-export class StructuredListWrapper extends Component {
-  static propTypes = {
-    /**
-     * Provide the contents of your StructuredListWrapper
-     */
-    children: PropTypes.node,
-
-    /**
-     * Specify an optional className to be applied to the container node
-     */
-    className: PropTypes.string,
-
-    /**
-     * Specify whether a border should be added to your StructuredListWrapper
-     */
-    border: PropTypes.bool,
-
-    /**
-     * Specify whether your StructuredListWrapper should have selections
-     */
-    selection: PropTypes.bool,
-
-    /**
-     * Specify a label to be read by screen readers on the container node
-     */
-    ariaLabel: PropTypes.string,
-  };
-
-  static defaultProps = {
-    border: false,
-    selection: false,
-    ariaLabel: 'Structured list section',
-  };
-
-  render() {
-    const {
-      children,
-      selection,
-      className,
-      border,
-      ariaLabel,
-      ...other
-    } = this.props;
-
-    const classes = classNames(`${prefix}--structured-list`, className, {
-      [`${prefix}--structured-list--border`]: border,
-      [`${prefix}--structured-list--selection`]: selection,
-    });
-
-    return (
-      <section className={classes} {...other} aria-label={ariaLabel}>
-        {children}
-      </section>
-    );
-  }
+export function StructuredListWrapper({
+  children,
+  selection,
+  className,
+  ariaLabel,
+  ...other
+}) {
+  const classes = classNames(`${prefix}--structured-list`, className, {
+    [`${prefix}--structured-list--selection`]: selection,
+  });
+  return (
+    <section
+      className={classes}
+      {...other}
+      aria-label={ariaLabel || other['aria-label']}>
+      {children}
+    </section>
+  );
 }
+StructuredListWrapper.propTypes = {
+  /**
+   * Provide the contents of your StructuredListWrapper
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify whether your StructuredListWrapper should have selections
+   */
+  selection: PropTypes.bool,
+
+  /**
+   * Specify a label to be read by screen readers on the container node
+   */
+  ariaLabel: PropTypes.string,
+};
+
+StructuredListWrapper.defaultProps = {
+  selection: false,
+  ariaLabel: 'Structured list section',
+};
 
 export class StructuredListHead extends Component {
   static propTypes = {
@@ -85,7 +74,6 @@ export class StructuredListHead extends Component {
 
   render() {
     const { children, className, ...other } = this.props;
-
     const classes = classNames(`${prefix}--structured-list-thead`, className);
     return (
       <div className={classes} {...other}>
