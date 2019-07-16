@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Component } from 'react';
+import React, { Component, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
-import uid from '../../tools/uniqueId';
+import uniqueId from '../../tools/uniqueId';
 
 const { prefix } = settings;
 
@@ -79,71 +79,71 @@ StructuredListHead.propTypes = {
   className: PropTypes.string,
 };
 
-export class StructuredListInput extends Component {
-  static propTypes = {
-    /**
-     * Specify an optional className to be applied to the input
-     */
-    className: PropTypes.string,
-
-    /**
-     * Specify a custom `id` for the input
-     */
-    id: PropTypes.string,
-
-    /**
-     * Specify the value of the input
-     */
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-
-    /**
-     * Provide a `name` for the input
-     */
-    name: PropTypes.string,
-
-    /**
-     * Provide a `title` for the input
-     */
-    title: PropTypes.string,
-
-    /**
-     * Specify whether the underlying input should be checked by default
-     */
-    defaultChecked: PropTypes.bool,
-
-    /**
-     * Provide an optional hook that is called each time the input is updated
-     */
-    onChange: PropTypes.func,
-  };
-
-  static defaultProps = {
-    onChange: () => {},
-    value: 'value',
-    title: 'title',
-  };
-
-  UNSAFE_componentWillMount() {
-    this.uid = this.props.id || uid();
-  }
-
-  render() {
-    const { className, value, name, title, ...other } = this.props;
-    const classes = classNames(`${prefix}--structured-list-input`, className);
-    return (
-      <input
-        {...other}
-        type="radio"
-        tabIndex={-1}
-        id={this.uid}
-        className={classes}
-        value={value}
-        name={name}
-        title={title}
-      />
-    );
-  }
+export function StructuredListInput({
+  className,
+  id,
+  value,
+  name,
+  title,
+  ...other
+}) {
+  const uid = useRef(id || uniqueId());
+  const classes = classNames(`${prefix}--structured-list-input`, className);
+  return (
+    <input
+      {...other}
+      type="radio"
+      tabIndex={-1}
+      id={uid.current}
+      className={classes}
+      value={value}
+      name={name}
+      title={title}
+    />
+  );
 }
+StructuredListInput.propTypes = {
+  /**
+   * Specify an optional className to be applied to the input
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify a custom `id` for the input
+   */
+  id: PropTypes.string,
+
+  /**
+   * Specify the value of the input
+   */
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+
+  /**
+   * Provide a `name` for the input
+   */
+  name: PropTypes.string,
+
+  /**
+   * Provide a `title` for the input
+   */
+  title: PropTypes.string,
+
+  /**
+   * Specify whether the underlying input should be checked by default
+   */
+  defaultChecked: PropTypes.bool,
+
+  /**
+   * Provide an optional hook that is called each time the input is updated
+   */
+  onChange: PropTypes.func,
+};
+
+StructuredListInput.defaultProps = {
+  onChange: () => {},
+  value: 'value',
+  title: 'title',
+};
 
 export function StructuredListRow({
   onKeyDown,
