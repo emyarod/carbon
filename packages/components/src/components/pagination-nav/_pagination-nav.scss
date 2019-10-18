@@ -161,11 +161,10 @@
   .#{$prefix}--pagination-nav__page--select {
     appearance: none;
     max-height: $button-min-width;
-    text-indent: calc(50% - 4.5px);
-    // Override some Firefox user-agent styles
-    @-moz-document url-prefix() {
-      text-indent: 0;
+    @supports not (text-align-last: center) {
+      text-indent: calc(50% - 4.5px);
     }
+    text-align-last: center;
   }
 
   .#{$prefix}--pagination-nav__select-icon-wrapper {
