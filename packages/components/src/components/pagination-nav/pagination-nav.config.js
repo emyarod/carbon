@@ -91,10 +91,14 @@ module.exports = {
                 value: '9',
                 page: '9',
               },
+              {
+                value: '10',
+                page: '10',
+              },
             ],
           },
           {
-            page: 10,
+            page: 11,
           },
         ],
         showPagePrevious: true,
