@@ -8,7 +8,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-
 import {
   withKnobs,
   array,
@@ -17,6 +16,7 @@ import {
   text,
 } from '@storybook/addon-knobs';
 import Pagination from '../Pagination';
+import PaginationSkeleton from './Pagination.Skeleton';
 
 const props = () => ({
   disabled: boolean('Disable page inputs (disabled)', false),
@@ -69,4 +69,11 @@ storiesOf('Pagination', module)
         text: `Showcasing unique ids for each pagination component`,
       },
     }
-  );
+  )
+  .add('skeleton', () => <PaginationSkeleton />, {
+    info: {
+      text: `
+          The pagination component is used to switch through multiple pages of items, when only a maxium number of items can be displayed per page. Can be used in combination with other components like DataTable.
+        `,
+    },
+  });
