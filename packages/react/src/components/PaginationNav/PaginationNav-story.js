@@ -8,7 +8,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean, number } from '@storybook/addon-knobs';
+import { withKnobs, boolean, number, object } from '@storybook/addon-knobs';
 import PaginationNav from '../PaginationNav';
 import PaginationNavSkeleton from './PaginationNav.Skeleton';
 
@@ -20,19 +20,42 @@ const props = () => ({
   pageSize: number('Number of items per page (pageSize)', 10),
   pagesToShow: number('Number of steps to show in the nav (pagesToShow)', 11),
   totalItems: number('Total number of pages (totalItems)', 103),
+  translationIds: object(
+    'PaginationNav translation IDs (for translateWithId callback)',
+    {
+      'next.page': 'Next page',
+      page: 'Page',
+      'previous.page': 'Previous page',
+      'select.page.number': 'select page number',
+    }
+  ),
 });
 
 storiesOf('PaginationNav', module)
   .addDecorator(withKnobs)
   .add(
     'PaginationNav',
-    () => (
-      <>
-        <PaginationNav {...props()} />
-        <PaginationNav {...props()} pagesToShow={5} />
-        <PaginationNav {...props()} pagesToShow={2} />
-      </>
-    ),
+    () => {
+      const { translationIds, ...paginationNavProps } = props();
+      return (
+        <>
+          <PaginationNav
+            translateWithId={id => translationIds[id]}
+            {...paginationNavProps}
+          />
+          <PaginationNav
+            translateWithId={id => translationIds[id]}
+            {...paginationNavProps}
+            pagesToShow={5}
+          />
+          <PaginationNav
+            translateWithId={id => translationIds[id]}
+            {...paginationNavProps}
+            pagesToShow={2}
+          />
+        </>
+      );
+    },
     {
       info: {
         text: `
